@@ -9,12 +9,12 @@ class TestRestrictInternetAccess(unittest.TestCase):
         self.restrictor = RestrictNetworkAccess()
 
     def test_install(self):
-        self.restrictor.install()
+        self.restrictor.activate()
         self.assertEqual(socket.socket, NoInternetSocket)
         self.assertEqual(socket.SocketType, NoInternetSocket)
 
     def test_uninstall(self):
-        self.restrictor.uninstall()
+        self.restrictor.deactivate()
         self.assertNotEqual(socket.socket, NoInternetSocket)
         self.assertNotEqual(socket.SocketType, NoInternetSocket)
 

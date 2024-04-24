@@ -17,13 +17,10 @@ class RestrictOSAccess(metaclass=Singleton):
         self.original_os_write = None
         self.original_makedirs = None
 
-        self.whitelisted_operations = []#[('open', '/dev/null')]
-        self.whitelisted_filenames = [
-        ]
-        self.whitelisted_imports = [
-        ]
-        self.blacklisted_filenames = [
-        ]
+        self.whitelisted_operations = [] # [('open', '/dev/null')]
+        self.whitelisted_filenames = []
+        self.whitelisted_imports = []
+        self.blacklisted_filenames = []
 
     def restrict_os_write(self, *args, **kwargs):
         return self.original_os_write(*args, **kwargs)
@@ -84,12 +81,22 @@ class RestrictOSAccess(metaclass=Singleton):
     def log_writes(self):
         os.write = LogDiscWriter()
 
-    def install(self):
+    def activate(
+        self,
+        whitelisted_operations: list = None,
+        whitelisted_filenames: list = None,
+        whitelisted_imports: list = None,
+        blacklisted_filenames: list = None,
+    ):
         """
         Install restrictions on OS access.
         :return:
         """
-        pass
+        self.whitelisted_operations = whitelisted_operations or []
+        self.whitelisted_filenames = whitelisted_filenames or []
+        self.whitelisted_imports = whitelisted_imports or []
+        self.blacklisted_filenames = blacklisted_filenames or []
+
         self.original_open = builtins.open
         self.original_import = builtins.__import__
         self.original_os_write = os.write
@@ -101,7 +108,7 @@ class RestrictOSAccess(metaclass=Singleton):
 
         self.log_writes()
 
-    def uninstall(self):
+    def deactivate(self):
         """
         Uninstall the restrictions on OS access.
         :return:

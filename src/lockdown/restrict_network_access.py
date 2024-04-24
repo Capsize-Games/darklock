@@ -16,21 +16,22 @@ class RestrictNetworkAccess(metaclass=Singleton):
         """
         logging.basicConfig(level=logging.INFO)
         self.logger = logging.getLogger(__name__)
-        handler = logging.FileHandler('network_access_attempts.log')
+        # handler = logging.FileHandler('network_access_attempts.log')
+        handler = logging.StreamHandler()
         handler.setLevel(logging.INFO)  # Set the handler's level to INFO
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
         self.logger.setLevel(logging.INFO)
 
-    def install(self):
+    def activate(self):
         self.logger.info("Installing network restrictions.")
         self.original_socket = socket.socket
         self.original_socket_type = socket.SocketType
         socket.socket = NoInternetSocket
         socket.SocketType = NoInternetSocket
 
-    def uninstall(self):
+    def deactivate(self):
         self.logger.info("Uninstalling network restrictions.")
         socket.socket = self.original_socket
         socket.SocketType = self.original_socket_type

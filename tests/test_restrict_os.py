@@ -12,15 +12,15 @@ class TestRestrictOSAccess(unittest.TestCase):
     def test_singleton(self):
         self.assertEqual(self.restrict_os_access1, self.restrict_os_access2)
 
-    def test_install(self):
-        self.restrict_os_access1.install()
+    def test_activate(self):
+        self.restrict_os_access1.activate()
         self.assertIsNotNone(self.restrict_os_access1.original_open)
         self.assertIsNotNone(self.restrict_os_access1.original_import)
         self.assertIsNotNone(self.restrict_os_access1.original_os_write)
         self.assertIsNotNone(self.restrict_os_access1.original_makedirs)
 
-    def test_uninstall(self):
-        self.restrict_os_access1.uninstall()
+    def test_deactivate(self):
+        self.restrict_os_access1.deactivate()
         self.assertEqual(self.restrict_os_access1.original_open, builtins.open)
         self.assertEqual(self.restrict_os_access1.original_import, builtins.__import__)
         self.assertEqual(self.restrict_os_access1.original_os_write, os.write)

@@ -1,3 +1,6 @@
+import traceback
+
+
 class LogDiscWriter:
     """
     Logs all writing attempts to the disk
