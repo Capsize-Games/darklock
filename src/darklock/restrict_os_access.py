@@ -5,8 +5,6 @@ import re
 import os
 import sys
 import traceback
-import importlib.abc
-import importlib.util
 
 
 class RestrictOSAccess(metaclass=Singleton):
