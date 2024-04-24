@@ -23,22 +23,22 @@ pip install darklock
 
 Import into your application at the top of the main entry file (e.g. `main.py`).
 
-Install the lockdown for the service you want to restrict.
+Install the darklock for the service you want to restrict.
 
 ```python
-import lockdown
+import darklock
 
-lockdown.network.install()
-lockdown.os.install()
+darklock.network.install()
+darklock.os.install()
 ```
 
-Uninstall the lockdown for the service you no longer want to restrict.
+Uninstall the darklock for the service you no longer want to restrict.
 
 ```python
-import lockdown
+import darklock
 
-lockdown.network.uninstall()
-lockdown.os.uninstall()
+darklock.network.uninstall()
+darklock.os.uninstall()
 ```
 
 ---
