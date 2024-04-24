@@ -21,13 +21,11 @@ pip install lockdown
 
 Import into your application at the top of the main entry file (e.g. `main.py`).
 
-```python
-import lockdown
-```
-
 Install the lockdown for the service you want to restrict.
 
 ```python
+import lockdown
+
 lockdown.network.install()
 lockdown.os.install()
 ```
@@ -35,6 +33,8 @@ lockdown.os.install()
 Uninstall the lockdown for the service you no longer want to restrict.
 
 ```python
+import lockdown
+
 lockdown.network.uninstall()
 lockdown.os.uninstall()
 ```
