@@ -14,7 +14,7 @@ through.
 ## Installation
 
 ```bash
-pip install lockdown
+pip install darklock
 ```
 
 ---
