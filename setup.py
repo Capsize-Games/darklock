@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="lockdown",
+    name="darklock",
     version="0.1.0",
     author="Capsize LLC",
     description="",
@@ -10,7 +10,7 @@ setup(
     keywords="",
     license="GPL-3.0",
     author_email="contact@capsizegames.com",
-    url="https://github.com/Capsize-Games/lockdown",
+    url="https://github.com/Capsize-Games/darklock",
     package_dir={"": "src"},
     packages=find_packages("src"),
     python_requires=">=3.10.0",

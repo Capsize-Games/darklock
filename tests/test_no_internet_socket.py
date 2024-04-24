@@ -1,5 +1,5 @@
 import unittest
-from lockdown.no_internet_socket import NoInternetSocket
+from darklock.no_internet_socket import NoInternetSocket
 
 
 class TestNoInternetSocket(unittest.TestCase):

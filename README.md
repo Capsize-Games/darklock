@@ -1,4 +1,4 @@
-# Lockdown
+# Darklock
 
 Completely disable the internet and other services, only allowing whitelists
 through.

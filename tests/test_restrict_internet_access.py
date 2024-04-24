@@ -1,7 +1,7 @@
 import unittest
 import socket
-from lockdown.no_internet_socket import NoInternetSocket
-from lockdown.restrict_network_access import RestrictNetworkAccess
+from darklock.no_internet_socket import NoInternetSocket
+from darklock.restrict_network_access import RestrictNetworkAccess
 
 
 class TestRestrictInternetAccess(unittest.TestCase):

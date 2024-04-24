@@ -1,7 +1,7 @@
 import builtins
 import os
 import unittest
-from lockdown.restrict_os_access import RestrictOSAccess
+from darklock.restrict_os_access import RestrictOSAccess
 
 
 class TestRestrictOSAccess(unittest.TestCase):

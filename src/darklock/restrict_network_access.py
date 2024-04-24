@@ -1,7 +1,7 @@
 import socket
 import logging
-from lockdown.no_internet_socket import NoInternetSocket
-from lockdown.singleton import Singleton
+from darklock.no_internet_socket import NoInternetSocket
+from darklock.singleton import Singleton
 
 
 class RestrictNetworkAccess(metaclass=Singleton):

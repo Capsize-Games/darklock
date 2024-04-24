@@ -1,5 +1,5 @@
-from lockdown.singleton import Singleton
-from lockdown.log_disc_writer import LogDiscWriter
+from darklock.singleton import Singleton
+from darklock.log_disc_writer import LogDiscWriter
 import builtins
 import re
 import os
