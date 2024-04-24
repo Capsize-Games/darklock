@@ -7,6 +7,8 @@ through.
 
 ![img.png](img.png)
 
+[![Upload Python Package](https://github.com/Capsize-Games/darklock/actions/workflows/python-publish.yml/badge.svg)](https://github.com/Capsize-Games/darklock/actions/workflows/python-publish.yml)
+
 ---
 
 ## Installation
