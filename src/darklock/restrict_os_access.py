@@ -23,6 +23,11 @@ class RestrictOSAccess(metaclass=Singleton):
     def restrict_os_write(self, *args, **kwargs):
         return self.original_os_write(*args, **kwargs)
 
+    def restricted_open(self, *args, **kwargs):
+        if ('open', args[0]) in self.whitelisted_operations or self.check_stack_trace():
+            return self.original_open(*args, **kwargs)
+        raise PermissionError("File system operations are not allowed")
+
     def restricted_os_makedirs(self, *args, **kwargs):
         if ('makedirs', args[0]) in self.whitelisted_operations or self.check_stack_trace():
             return self.original_makedirs(*args, **kwargs)
@@ -103,6 +108,8 @@ class RestrictOSAccess(metaclass=Singleton):
         os.makedirs = self.restricted_os_makedirs
 
         os.write = self.restrict_os_write
+
+        #builtins.open = self.restricted_open
 
         self.log_writes()
 
