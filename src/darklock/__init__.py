@@ -11,7 +11,9 @@ def activate(
     whitelisted_imports: list = None,
     blacklisted_filenames: list = None,
 ):
-    network.activate()
+    # network.activate(
+    #     allowed_port=4222
+    # )
     os.activate(
         whitelisted_operations,
         whitelisted_filenames,

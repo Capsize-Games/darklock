@@ -1,33 +1,14 @@
 import logging
+import socket
 
-
-class NoInternetSocket:
+class NoInternetSocket(socket.socket):
     """
-    A custom socket class that prevents any form of internet connections.
-
-    This class overrides the default socket object in Python's socket module to ensure that
-    no outgoing or incoming internet connections can be established. Attempting to create
-    or use a socket connection will result in a ConnectionError.
-
-    Methods:
-        __init__(*args, **kwargs): Constructor for the socket object that raises an error.
-        connect(*args, **kwargs): Method that simulates the connect functionality and raises an error.
+    A custom socket class that prevents any form of internet connections except for localhost on a specified port.
     """
 
     def __init__(self, *args, **kwargs):
-        """
-        Initializes a new instance of the socket object and logs the attempt.
-
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
-
-        Raises:
-            ConnectionError: Always thrown to indicate that network connections are disabled.
-        """
+        super().__init__(*args, **kwargs)
         self.__init_logger()
-        self.logger.info("Socket creation attempted and blocked.")
-        raise ConnectionError("This application does not allow internet connections.")
 
     def __init_logger(self):
         self.logger = logging.getLogger(__name__)
@@ -37,18 +18,24 @@ class NoInternetSocket:
         self.logger.addHandler(handler)
         self.logger.setLevel(logging.INFO)
 
-    def connect(self, *args, **kwargs):
+    def connect(self, address):
         """
-        Simulates the behavior of the socket's `connect` method. This override is specifically
-        designed to log and block any attempts to establish a connection using the socket object.
+        Overrides the socket's `connect` method to allow connections only to localhost on a specific port.
 
         Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
+            address (tuple): A tuple of (host, port)
 
         Raises:
-            ConnectionError: Always thrown to prevent any form of network connection.
+            ConnectionError: If the connection attempt is to an address other than localhost on the allowed port.
         """
-        self.__init_logger()
-        self.logger.info("Connection attempt blocked.")
-        raise ConnectionError("This application does not allow internet connections.")
+        host, port = address
+        if host == '127.0.0.1' and port == self.allowed_port:
+            super().connect(address)
+            self.logger.info(f"Allowed connection to {host} on port {port}.")
+        else:
+            self.logger.info(f"Blocked connection attempt to {host} on port {port}.")
+            raise ConnectionError(f"Connection to {host} on port {port} is not allowed.")
+
+    @classmethod
+    def set_allowed_port(cls, port):
+        cls.allowed_port = port
