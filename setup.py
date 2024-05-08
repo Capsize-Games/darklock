@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="darklock",
-    version="0.1.1",
+    version="0.1.2",
     author="Capsize LLC",
     description="",
     long_description=open("README.md", "r", encoding="utf-8").read(),
