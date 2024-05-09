@@ -27,10 +27,10 @@ class RestrictOSAccess(metaclass=Singleton):
         self.logger.addHandler(logging.StreamHandler())
 
     def is_directory_whitelisted(self, directory: str) -> bool:
-        print("IS DIRECTORY WHITELISTED")
-        print(directory)
-        print(self.whitelisted_directories)
-        return directory in self.whitelisted_directories
+        for d in self.whitelisted_directories:
+            if str(d) in str(directory):
+                return True
+        return False
 
     def restrict_os_write(self, *args, **kwargs):
         return self.original_os_write(*args, **kwargs)
