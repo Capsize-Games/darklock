@@ -10,6 +10,7 @@ def activate(
     whitelisted_filenames: list = None,
     whitelisted_imports: list = None,
     blacklisted_filenames: list = None,
+    whitelisted_directories: list = None,
 ):
     # network.activate(
     #     allowed_port=4222
@@ -19,6 +20,7 @@ def activate(
         whitelisted_filenames,
         whitelisted_imports,
         blacklisted_filenames,
+        whitelisted_directories,
     )
 
 def deactivate():
