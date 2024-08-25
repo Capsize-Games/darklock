@@ -22,6 +22,8 @@ class RestrictOSAccess(metaclass=Singleton):
         self.blacklisted_filenames = []
         self.whitelisted_directories = []
 
+        self.log_disc_writter = LogDiscWriter()
+
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.DEBUG)
         self.logger.addHandler(logging.StreamHandler())
@@ -33,7 +35,14 @@ class RestrictOSAccess(metaclass=Singleton):
         return False
 
     def restrict_os_write(self, *args, **kwargs):
-        return self.original_os_write(*args, **kwargs)
+        stack = traceback.extract_stack()
+        filename = stack[-2].filename
+        if (
+            self.is_directory_whitelisted(args[0]) or
+            'write' in self.whitelisted_directories or self.check_stack_trace()
+        ):
+            return self.original_os_write(*args, **kwargs)
+        self.log_disc_writter(filename=filename)
 
     def restricted_open(self, *args, **kwargs):
         if (
@@ -144,7 +153,7 @@ class RestrictOSAccess(metaclass=Singleton):
 
         #builtins.open = self.restricted_open
 
-        self.log_writes()
+        #self.log_writes()
 
     def deactivate(self):
         """

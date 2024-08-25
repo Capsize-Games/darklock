@@ -15,5 +15,8 @@ class LogDiscWriter:
         print(f"Write attempt: {self.total_write_attempts}")
 
         # show where write came from:
-        stack = traceback.extract_stack()
-        print(f"Write attempt from: {stack[-2]}")
+        filename = kwargs.get("filename", None)
+        if not filename:
+            stack = traceback.extract_stack()
+            filename = stack[-2].filename
+        print(f"Write attempt from: {filename}")
